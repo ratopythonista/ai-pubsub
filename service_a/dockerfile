@@ -1,0 +1,9 @@
+FROM python:3.10-buster
+
+WORKDIR /app
+
+COPY . /app
+RUN pip install -e .
+RUN pip install jai_pubsub-0.0.1-py3-none-any.whl
+
+CMD [ "python", "app.py" ]

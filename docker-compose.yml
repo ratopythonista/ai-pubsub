@@ -1,0 +1,24 @@
+version: '3.1'
+services:
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - '6379:6379'
+
+  service_a:
+    build: ./service_a
+    container_name: service_a
+    depends_on:
+      - redis
+      - celery_a
+
+  celery_a:
+    build: ./pubsub
+    container_name: celery_a
+    command: celery -A jai_pubsub.app.jai worker -l info
+    environment:
+      - C_FORCE_ROOT=True
+    depends_on:
+      - redis
