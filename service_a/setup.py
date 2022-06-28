@@ -9,7 +9,12 @@ from setuptools import find_packages, setup
 dev_requirements = ["pylama==7.7.1", "pytest==6.2.4", "black==22.1.0"]
 unit_test_requirements = ["pytest==6.2.4", "pytest-cov==2.12.1"]
 integration_test_requirements = ["pytest==6.2.4 ", "pytest-cov==2.12.1"]
-run_requirements = ["celery>=5.2.7", "redis>=4.3.3", "jsonpickle>=2.2.0"]
+run_requirements = [
+    "celery>=5.2.7",
+    "redis>=4.3.3",
+    "jsonpickle>=2.2.0",
+    "billiard>=3.6.4.0",
+]
 
 # with io.open("./__init__.py", encoding="utf8") as version_f:
 #     version_match = re.search(
