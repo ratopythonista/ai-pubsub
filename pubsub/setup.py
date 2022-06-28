@@ -14,6 +14,9 @@ run_requirements = [
     "redis>=4.3.3",
     "jsonpickle>=2.2.0",
     "billiard>=3.6.4.0",
+    "torch>=1.11.0",
+    "torchvision>=0.12.0",
+    "eventlet>=0.33.1",
 ]
 
 # with io.open("__init__.py", encoding="utf8") as version_f:
