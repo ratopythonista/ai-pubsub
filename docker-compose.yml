@@ -1,0 +1,39 @@
+version: '3.1'
+services:
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - '6379:6379'
+
+  service_a:
+    build: ./service_a
+    container_name: service_a
+    command: python app.py
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    depends_on:
+      - redis
+      - celery_a
+    volumes:
+      - ./service_a:/app
+
+  celery_a:
+    build: ./pubsub
+    container_name: celery_a
+    command: celery -A jai_pubsub.app.jai worker -l info -P eventlet -c 1000
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    environment:
+      - C_FORCE_ROOT=True
+    depends_on:
+      - redis
+    volumes:
+      - ./pubsub:/app

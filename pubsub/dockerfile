@@ -1,0 +1,8 @@
+FROM gpuci/miniconda-cuda:11.4-runtime-ubuntu20.04
+
+WORKDIR /app
+
+COPY . /app
+
+RUN conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+RUN conda install celery jsonpickle billiard eventlet redis-py -c conda-forge
